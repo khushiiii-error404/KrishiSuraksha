@@ -1,7 +1,5 @@
 # 🌾 Krushi Suraksha
 
-# DEMO-LINK : [krishisuraksha.vercel.app](https://krishisuraksha.vercel.app/)
-
 ### **AI-Powered Parametric Crop Insurance for Instant Settlements**
 
 Krushi Suraksha is an InsurTech platform designed to revolutionize crop insurance by using AI-driven crop analysis, weather intelligence, and satellite context to process claims **within minutes instead of months**.
