@@ -1,3 +1,4 @@
+
 import { Language } from "./types";
 
 export const translations = {
@@ -38,7 +39,7 @@ export const translations = {
     analyze: "Analyze Damage",
     processingTitle: "Processing Claim",
     step1: "Analyzing visual damage patterns...",
-    step2: "Cross-referencing Sentinel-2 imagery...",
+    step2: "Cross-referencing Esri World Imagery...",
     step3: "Verifying historical weather data...",
     step4: "Finalizing parametric payout calculation...",
     verificationFailed: "Verification Failed",
@@ -131,7 +132,7 @@ export const translations = {
     analyze: "ಹಾನಿಯನ್ನು ವಿಶ್ಲೇಷಿಸಿ",
     processingTitle: "ಕ್ಲೈಮ್ ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗುತ್ತಿದೆ",
     step1: "ದೃಶ್ಯ ಹಾನಿ ಮಾದರಿಗಳನ್ನು ವಿಶ್ಲೇಷಿಸಲಾಗುತ್ತಿದೆ...",
-    step2: "Sentinel-2 ಚಿತ್ರಣವನ್ನು ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ...",
+    step2: "Esri World ಚಿತ್ರಣವನ್ನು ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ...",
     step3: "ಐತಿಹಾಸಿಕ ಹವಾಮಾನ ಡೇಟಾವನ್ನು ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ...",
     step4: "ಪ್ಯಾರಾಮೆಟ್ರಿಕ್ ಪಾವತಿ ಲೆಕ್ಕಾಚಾರವನ್ನು ಅಂತಿಮಗೊಳಿಸಲಾಗುತ್ತಿದೆ...",
     verificationFailed: "ಪರಿಶೀಲನೆ ವಿಫಲವಾಗಿದೆ",
