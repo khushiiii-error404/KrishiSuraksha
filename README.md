@@ -1,6 +1,6 @@
 # 🌾 Krushi Suraksha
 
-#DEMO-LINK : krishisuraksha.vercel.app
+# DEMO-LINK : [krishisuraksha.vercel.app](https://krishisuraksha.vercel.app/)
 
 ### **AI-Powered Parametric Crop Insurance for Instant Settlements**
 
