@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Languages } from 'lucide-react';
 import { Language } from '../types';
@@ -9,7 +10,7 @@ interface HeaderProps {
   setLanguage: (lang: Language) => void;
 }
 
-// Custom logo component combining a shield and a sprout
+// Custom logo component: Wheat Stalk inside a Shield
 const KrishiSurakshaLogo = ({ className }: { className?: string }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -23,11 +24,14 @@ const KrishiSurakshaLogo = ({ className }: { className?: string }) => (
     strokeLinejoin="round"
     className={className}
   >
-    {/* Shield */}
+    {/* Shield Outline */}
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-    {/* Sprout */}
-    <path d="M14 9.5c-1-1-2-1.5-3-2.5-1 1-2 1.5-3 2.5" />
-    <path d="M12 15V9" />
+    {/* Wheat/Crop Stalk */}
+    <path d="M12 8v9" />
+    <path d="M12 12c-1.7-1-2.5-3.5-2.5-3.5" />
+    <path d="M12 12c1.7-1 2.5-3.5 2.5-3.5" />
+    <path d="M12 15c-1.3-0.5-2-2-2-2" />
+    <path d="M12 15c1.3-0.5 2-2 2-2" />
   </svg>
 );
 

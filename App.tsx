@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Header } from './components/Header';
 import { Dashboard } from './components/Dashboard';
@@ -24,8 +25,8 @@ const MOCK_POLICIES: Policy[] = [
     premiumPaid: 5000, // 2% of 250000
     implementingAgency: 'AIC of India',
     location: 'Mandya, Karnataka',
-    lat: 12.5234,
-    lng: 76.8951,
+    lat: 12.532981,
+    lng: 76.932119,
     govtDbStatus: 'Linked'
   },
   {
@@ -39,8 +40,8 @@ const MOCK_POLICIES: Policy[] = [
     premiumPaid: 10000, // 2% of 500000
     implementingAgency: 'HDFC Ergo',
     location: 'Mandya, Karnataka',
-    lat: 12.5189,
-    lng: 76.9012,
+    lat: 12.533500,
+    lng: 76.931500,
     govtDbStatus: 'Linked'
   },
   {
@@ -54,8 +55,8 @@ const MOCK_POLICIES: Policy[] = [
     premiumPaid: 2250, // 1.5% of 150000
     implementingAgency: 'AIC of India',
     location: 'Mandya, Karnataka',
-    lat: 12.5255,
-    lng: 76.8899,
+    lat: 12.531500,
+    lng: 76.933000,
     govtDbStatus: 'Linked'
   }
 ];
