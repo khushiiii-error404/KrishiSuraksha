@@ -1,3 +1,4 @@
+
 export type Language = 'en' | 'kn';
 
 export interface DisasterAnalysis {
@@ -58,6 +59,13 @@ export interface WeatherData {
   maxTemp7Days: number;
   isConsistent: boolean;
   source?: string;
+}
+
+export interface CurrentWeather {
+  temperature: number;
+  humidity: number;
+  windSpeed: number;
+  conditionCode: number;
 }
 
 export interface SatelliteData {

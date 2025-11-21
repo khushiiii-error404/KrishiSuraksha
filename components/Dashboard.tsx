@@ -1,7 +1,8 @@
-import React from 'react';
-import { Plus, DollarSign, TrendingUp, Activity, CloudRain, AlertTriangle, Landmark, FileCheck, Link, Shield, User, Droplets, Wind, Sun } from 'lucide-react';
+
+import React, { useEffect, useState } from 'react';
+import { Plus, DollarSign, TrendingUp, Activity, CloudRain, AlertTriangle, Landmark, FileCheck, Link, Shield, User, Droplets, Wind, Sun, Loader2 } from 'lucide-react';
 import { Button } from './Button';
-import { Claim, Policy, Language, UserProfile } from '../types';
+import { Claim, Policy, Language, UserProfile, CurrentWeather } from '../types';
 import { translations } from '../translations';
 import { 
   AreaChart, 
@@ -13,6 +14,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { MapView } from './MapView';
+import { getCurrentWeather } from '../services/weatherService';
 
 interface DashboardProps {
   onReportClick: (policy: Policy) => void;
@@ -33,7 +35,24 @@ const MOCK_HISTORY_DATA = [
 
 export const Dashboard: React.FC<DashboardProps> = ({ onReportClick, claims, policies, language, userProfile }) => {
   const [selectedPolicyId, setSelectedPolicyId] = React.useState<string>(policies[0]?.id || '');
+  const [currentWeather, setCurrentWeather] = useState<CurrentWeather | null>(null);
+  const [loadingWeather, setLoadingWeather] = useState(false);
+  
   const t = translations[language];
+  const selectedPolicy = policies.find(p => p.id === selectedPolicyId);
+
+  // Fetch weather when selected policy changes
+  useEffect(() => {
+    const fetchWeather = async () => {
+      if (selectedPolicy) {
+        setLoadingWeather(true);
+        const weather = await getCurrentWeather(selectedPolicy.lat, selectedPolicy.lng);
+        setCurrentWeather(weather);
+        setLoadingWeather(false);
+      }
+    };
+    fetchWeather();
+  }, [selectedPolicy]);
   
   const totalPayouts = claims.reduce((acc, curr) => acc + (curr.status === 'Paid' ? curr.payout : 0), 0);
   const pendingClaims = claims.filter(c => c.status === 'Processing' || c.status === 'Approved' || c.status === 'Under Review').length;
@@ -45,8 +64,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ onReportClick, claims, pol
       maximumFractionDigits: 0
     }).format(amount);
   };
-
-  const selectedPolicy = policies.find(p => p.id === selectedPolicyId);
 
   const getStatusStyle = (status: Claim['status']) => {
     switch (status) {
@@ -96,28 +113,37 @@ export const Dashboard: React.FC<DashboardProps> = ({ onReportClick, claims, pol
             </div>
         </div>
 
-        {/* Weather Widget (Mocked for Dashboard, Real for Analysis) */}
-        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-5 text-white shadow-md flex flex-col justify-between relative overflow-hidden">
-             <div className="relative z-10">
-                <div className="flex justify-between items-start mb-4">
+        {/* Weather Widget - REAL DATA */}
+        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl p-5 text-white shadow-md flex flex-col justify-between relative overflow-hidden min-h-[180px]">
+             <div className="relative z-10 h-full flex flex-col justify-between">
+                <div className="flex justify-between items-start">
                     <div>
                         <h3 className="font-bold text-lg">{t.currentWeather}</h3>
                         <p className="text-blue-100 text-sm">{t.today}, {selectedPolicy?.location.split(',')[0]}</p>
                     </div>
                     <Sun className="h-8 w-8 text-yellow-300 animate-pulse" />
                 </div>
-                <div className="flex items-end mb-4">
-                    <span className="text-4xl font-bold">32°</span>
-                    <span className="text-lg mb-1 ml-1 text-blue-100">C</span>
-                </div>
-                <div className="flex gap-4 text-sm text-blue-50">
-                    <div className="flex items-center">
-                        <Droplets className="w-4 h-4 mr-1" /> 65%
+                
+                {loadingWeather || !currentWeather ? (
+                   <div className="flex items-center justify-center flex-1">
+                      <Loader2 className="w-8 h-8 animate-spin text-white/50" />
+                   </div>
+                ) : (
+                  <>
+                    <div className="flex items-end">
+                        <span className="text-4xl font-bold">{currentWeather.temperature.toFixed(1)}°</span>
+                        <span className="text-lg mb-1 ml-1 text-blue-100">C</span>
                     </div>
-                    <div className="flex items-center">
-                        <Wind className="w-4 h-4 mr-1" /> 12 km/h
+                    <div className="flex gap-4 text-sm text-blue-50 mt-2">
+                        <div className="flex items-center">
+                            <Droplets className="w-4 h-4 mr-1" /> {currentWeather.humidity}%
+                        </div>
+                        <div className="flex items-center">
+                            <Wind className="w-4 h-4 mr-1" /> {currentWeather.windSpeed} km/h
+                        </div>
                     </div>
-                </div>
+                  </>
+                )}
              </div>
              {/* Decorative */}
              <CloudRain className="absolute -right-4 -bottom-4 w-32 h-32 text-white/10" />
